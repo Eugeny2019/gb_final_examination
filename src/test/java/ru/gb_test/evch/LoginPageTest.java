@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
@@ -17,7 +18,7 @@ import java.io.*;
 import java.util.Properties;
 import java.util.Random;
 
-//ToDo после писправления валидации (сейчас вместо валидации отправляется запрос на бэк),
+//ToDo после исправления валидации (сейчас вместо валидации отправляется запрос на бэк),
 // добавить проверку на наличие текста валидации (см.таблицу ФЛК полей 1.1 Авторизация).
 // Сейчас нельзя добавить, т.к. не известны селекторы.
 
@@ -42,7 +43,9 @@ public class LoginPageTest {
 
     @BeforeEach
     public void initDriver() {
-        driver = new EventFiringDecorator(new AdditionalLogger()).decorate(new ChromeDriver());
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new EventFiringDecorator(new AdditionalLogger()).decorate(new ChromeDriver(options));
         driver.manage().window().setSize(new Dimension(1500, 900));
         driver.get(url);
         mainPage = new MainPage(driver);

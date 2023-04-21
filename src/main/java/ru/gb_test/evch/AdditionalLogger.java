@@ -13,7 +13,7 @@ public class AdditionalLogger implements WebDriverListener {
     }
 
     public void beforeQuit(WebDriver driver) {
-//        Allure.addAttachment("Скриншот перед закрытие браузера",
+//        Allure.addAttachment("Скриншот перед закрытием браузера",
 //                new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
     }
 
